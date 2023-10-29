@@ -14,5 +14,7 @@ logging.basicConfig(
     # 设置文件写入模式，需启用filename字段，a=追加 w=覆盖
     # filemode="a",
 )
-logging.error("error")
-logging.info("info")
+
+if __name__ == "__main__":
+    logging.error("error")
+    logging.info("info")
