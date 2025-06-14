@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import pymysql
-import traceback
+import logging
 import os
 import time
-import logging
+import traceback
 
+import pymysql
 
 logging.basicConfig(
     level=logging.WARN,
@@ -22,7 +22,11 @@ def enable_reconnect(func):
             cls.connection.ping()
         except Exception as e:
             cls.connection = pymysql.connect(
-                host=cls.host, port=cls.port, user=cls.user, password=cls.password, database=cls.dbname
+                host=cls.host,
+                port=cls.port,
+                user=cls.user,
+                password=cls.password,
+                database=cls.dbname,
             )
             logging.WARN("Warning: Connection reset and reconnect succ.")
         result = func(cls, *args, **kwargs)
@@ -39,7 +43,11 @@ class MySQLHandler(object):
         self.user = user
         self.password = password
         self.connection = pymysql.connect(
-            host=self.host, port=self.port, user=self.user, password=self.password, database=self.dbname
+            host=self.host,
+            port=self.port,
+            user=self.user,
+            password=self.password,
+            database=self.dbname,
         )
 
     def __del__(self) -> None:
